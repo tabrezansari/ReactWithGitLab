@@ -18,6 +18,7 @@ stages:
 build:
   stage: build
   script:
+    - npm install
     - npm run build --prod # Build for prod
 
   artifacts:
