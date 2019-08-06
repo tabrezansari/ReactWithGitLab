@@ -5,6 +5,7 @@ deploy:
   stage: deploy
   before_script:
     - mkdir -p ~/.ssh
+    - echo "$DEPLOY_SERVER_PRIVATE_KEY"
     - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - eval "$(ssh-agent -s)"
