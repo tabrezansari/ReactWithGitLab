@@ -1,28 +1,16 @@
-# Using the node alpine image to build the React app
-image: node:10.16.0
-
-# Announce the URL as per CRA docs
-# https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#advanced-configuration
-variables:
-  PUBLIC_URL: /ReactWithGitLab
-# Cache node modules - speeds up future builds
-cache:
-  paths:
-  - node_modules
-
-# Name the stages involved in the pipeline
 stages:
-- build
-- test
+  - deploy
 
-build:
-  stage: build
+deploy:
+  stage: deploy
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H 'bugzilla.intellicar.in' >> ~/.ssh/known_hosts
   script:
-    - npm install
-    - npm run build --prod # Build for prod
+    # your own server details here
+    - ssh tabrez@bugzilla.intellicar.in < deploy.sh
 
-  artifacts:
-    paths:
-    - dist # The built files for Gitlab Pages to serve
-  only:
-    - master # Only run on master branch
