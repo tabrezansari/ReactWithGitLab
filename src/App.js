@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Testing ReactApp with GitLab CI/CD hola hi.
+          Testing ReactApp with GitLab CI/CD hey.
         </p>
         
          
