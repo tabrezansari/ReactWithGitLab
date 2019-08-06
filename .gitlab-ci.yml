@@ -13,5 +13,5 @@ deploy:
     - ssh-keyscan -H 'bugzilla.intellicar.in' >> ~/.ssh/known_hosts
   script:
     # your own server details here
-    - ssh admin@bugzilla.intellicar.in < deploy.sh
+    - ssh intellicaradmin@bugzilla.intellicar.in < deploy.sh
 
